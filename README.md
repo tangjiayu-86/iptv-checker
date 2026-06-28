@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://github.com/zhimin-dev/iptv-checker/blob/main/icon.png" width="150" height="150" alt="IPTV Checker logo" />
 
-  <h1>IPTV Checker</h1>
+  <h1>iptv-checker</h1>
 
   <p><strong>检查你的 IPTV 播放列表是否可用</strong></p>
 
@@ -58,7 +58,10 @@ IPTV Checker 是一款高性能的 IPTV 播放列表检测工具，支持 Docker
 - 🎨 **深色模式**：内置深色主题，保护眼睛
 - 🔄 **EPG 支持**：支持电子节目单（EPG）配置与管理
 - 📡 **多格式兼容**：支持 M3U、M3U8、TXT 播放列表文件
-- 🔧 **高度可配置**：超时时间、字符替换、自定义排序、关键词匹配
+- 🏷️ **频道名智能匹配**：解析时自动通过 EPG 数据规范化 tvg-name/tvg-id，去除 4K 等质量后缀
+- 📺 **频道名显示模式**：支持在频道名后追加分辨率标签（HD/FHD）或数值（720p/1080p），多分辨率标记 *
+- 📁 **频道分组映射**：本地维护 tvg-name 与 group-title 的映射关系，支持 EPG 未映射频道快速匹配
+- 🔧 **高度可配置**：超时时间、自定义排序、关键词匹配、网速最快筛选
 
 ## 快速开始
 
@@ -115,7 +118,7 @@ GitHub API 对未认证请求有严格的频率限制（60 次/小时），配�
    - **Expiration**：自定义过期时间
    - **Repository access**：选择 `Public repositories (read-only)`
    - **Permissions**：`Contents` → `Read-only`
-4. 生成后复制 token，打开 Web 管理后台 → 系统配置 → base.json，填入 `github_token` 字段
+4. 生成后复制 token，打开 Web 管理后台 → 系统配置 → 基础配置，填入 `github_token` 字段
 
 > 保存时系统会自动调用 GitHub API 验证 token 有效性。
 
@@ -133,6 +136,7 @@ GitHub API 对未认证请求有严格的频率限制（60 次/小时），配�
 
 ### 最近更新
 
+- **4.7.0** — EPG 频道名自动匹配替换、频道名分辨率后缀显示模式、频道分组映射、全局 Host 统一管理、分组映射支持导入导出
 - **4.6.0** — GitHub 抓取迁移至 REST API、安全加固（SSRF / 路径穿越修复）、性能优化（连接池复用、减少 clone）、代码质量提升、11 项 Bug 修复
 - **4.5.1** — 修复不检查的问题、支持 CLI 触发检查
 - **4.5.0** — 支持 EPG 配置
