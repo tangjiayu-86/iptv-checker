@@ -2,6 +2,38 @@
 
 本项目所有重要变更都将记录在此文件中。
 
+## 4.7.1
+
+- **Bug 修复**：
+  - 修复 `fast_sort` 等 bool 字段接收字符串 `"true"`/`"false"` 导致 400 错误的问题
+  - 修复创建任务时 URL 前导空格导致后续请求失败的问题
+  - 修复 `/tasks/detail` 返回的 M3U 内容缺少 `x-tvg-url` header 的问题
+  - 修复 `no_check=true` + `ffmpeg_check=true` + `video_quality` 组合导致所有频道被清空的 Bug
+  - 修复 `video_quality` 在 `ffmpeg_check=false` 时被静默忽略、无任何提示的问题
+  - 修复 `valid()` 中 `result_name` 校验后的死代码
+  - 移除 `SearchOptions.quality` 未使用的字段
+- **安全加固**：
+  - 所有 `web::Json` 接收结构体中的 bool 字段统一使用灵活反序列化，接受 `true`/`false`/`"true"`/`"false"`/`"1"`/`"0"`
+
+## 4.7.0
+
+- **网络配置独立**：将网络相关配置（proxy、headers、user_agent）从 base.json 分离到 network.json
+- **EPG 管理**：
+  - 新增 EPG 源配置、同步、缓存管理 API
+  - 新增 EPG 频道列表和节目查询 API
+  - 支持自定义 EPG XML 生成
+- **分组映射**：新增频道分组映射功能，支持未映射频道查询
+- **配置导入导出**：支持系统配置的 ZIP 打包导出和导入恢复
+- **安全加固**：
+  - 新增 SSRF 防护，拦截内网 IP 和危险协议
+  - 新增 URL 合法性校验
+- **API 新增**：
+  - `/system/network-config` — 网络配置管理
+  - `/system/epg-config` — EPG 配置管理
+  - `/epg/sources`、`/epg/sync`、`/epg/cache` — EPG 源管理
+  - `/system/group-mapping` — 分组映射管理
+  - `/system/export`、`/system/import` — 配置导入导出
+
 ## 4.6.0
 
 - **GitHub 抓取迁移至 REST API**：将 GitHub 仓库文件获取从 HTML 页面解析改为 GitHub REST API（`api.github.com`）
